@@ -13,7 +13,7 @@ server:
 
 staffjoy:
   common:
-    sentry-dsn: ${SENTRY_DSN}
+    sentry-dsn: ${SENTRY_DSN:https://80bbf4ae778b525f9fe72e2813cd5246@sentry.io/1271087}
     deploy-env: ${DEPLOY:V2}
   signing-secret: ${SIGNING_SECRET}
 

@@ -231,6 +231,7 @@ public class AccountController {
     }
 
     private void validateEnv() {
+        // 只有开发环境有超级权限
         if (AuthConstant.AUTHORIZATION_SUPERPOWERS_SERVICE.equals(AuthContext.getAuthz())) {
             if (!EnvConstant.ENV_DEV.equals(this.envConfig.getName())) {
                 logger.warn("Development service trying to connect outside development environment");

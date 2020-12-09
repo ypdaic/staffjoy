@@ -20,7 +20,7 @@ public class Sessions {
                                  HttpServletResponse response) {
         long duration;
         int maxAge;
-
+        // 记住我，就是区别过期时间
         if (rememberMe) {
             // "Remember me"
             duration = LONG_SESSION;
@@ -33,8 +33,10 @@ public class Sessions {
 
         Cookie cookie = new Cookie(AuthConstant.COOKIE_NAME, token);
         cookie.setPath("/");
+        // 设置根域名
         cookie.setDomain(externalApex);
         cookie.setMaxAge(maxAge);
+        // 设置为true,js不可操作cookie
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
     }

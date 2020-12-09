@@ -97,6 +97,7 @@ public class AuthRequestInterceptor implements PreForwardRequestInterceptor {
 
     private void validateRestrict(MappingProperties mapping) {
         Service service = this.getService(mapping);
+        // 此服务仅限于开发和测试环境
         if (service.isRestrictDev() && !envConfig.isDebug()) {
             throw new FaradayException("This service is restrict to dev and test environment only");
         }

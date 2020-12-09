@@ -39,7 +39,7 @@ public class ServiceHelper {
 
     private final AccountRepo accountRepo;
 
-    private final SentryClient sentryClient;
+//    private final SentryClient sentryClient;
 
     private final BotClient botClient;
 
@@ -213,14 +213,14 @@ public class ServiceHelper {
     public void handleError(ILogger log, String errMsg) {
         log.error(errMsg);
         if (!envConfig.isDebug()) {
-            sentryClient.sendMessage(errMsg);
+//            sentryClient.sendMessage(errMsg);
         }
     }
 
     public void handleException(ILogger log, Exception ex, String errMsg) {
         log.error(errMsg, ex);
         if (!envConfig.isDebug()) {
-            sentryClient.sendException(ex);
+//            sentryClient.sendException(ex);
         }
     }
 }

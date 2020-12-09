@@ -56,7 +56,7 @@ public class StaffjoyConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthorizeInterceptor());
+//        registry.addInterceptor(new AuthorizeInterceptor());
     }
 
     @Bean
@@ -64,6 +64,9 @@ public class StaffjoyConfig implements WebMvcConfigurer {
         return new FeignRequestHeaderInterceptor();
     }
 
+    /**
+     * StructLog4J 日志初始化
+     */
     @PostConstruct
     public void init() {
         // init structured logging
@@ -75,8 +78,8 @@ public class StaffjoyConfig implements WebMvcConfigurer {
                 "service", appName});
     }
 
-    @PreDestroy
-    public void destroy() {
-        sentryClient().closeConnection();
-    }
+//    @PreDestroy
+//    public void destroy() {
+//        sentryClient().closeConnection();
+//    }
 }
