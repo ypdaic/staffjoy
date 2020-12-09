@@ -142,42 +142,85 @@
                         </execution>
                     </executions>
                 </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>io.fabric8</groupId>-->
+<!--                    <artifactId>docker-maven-plugin</artifactId>-->
+<!--                    <version>0.26.1</version>-->
+<!--                    <extensions>true</extensions>-->
+<!--                    <configuration>-->
+<!--                        <verbose>true</verbose>-->
+<!--                        <images>-->
+<!--                            <image>-->
+<!--                                <name>${project.artifactId}</name>-->
+<!--                                <build>-->
+<!--                                    <from>java:8-jdk-alpine</from>-->
+<!--                                    <entryPoint>-->
+<!--                                        <exec>-->
+<!--                                            <args>java</args>-->
+<!--                                            <args>-jar</args>-->
+<!--                                            <args>/maven/${project.build.finalName}.jar</args>-->
+<!--                                        </exec>-->
+<!--                                    </entryPoint>-->
+<!--                                    <assembly>-->
+<!--                                        <descriptorRef>artifact</descriptorRef>-->
+<!--                                    </assembly>-->
+<!--                                </build>-->
+<!--                            </image>-->
+<!--                        </images>-->
+
+<!--                    </configuration>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>build</id>-->
+<!--                            <phase>post-integration-test</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>build</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
+
                 <plugin>
-                    <groupId>io.fabric8</groupId>
+                    <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>0.26.1</version>
-                    <extensions>true</extensions>
+                    <version>0.4.13</version>
+                    <!--                <executions>-->
+                    <!--                    &lt;!&ndash;将build绑定到maven package生命周期&ndash;&gt;-->
+                    <!--                    <execution>-->
+                    <!--                        <id>build-docker-image</id>-->
+                    <!--                        <phase>package</phase>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>build</goal>-->
+                    <!--                        </goals>-->
+                    <!--                    </execution>-->
+                    <!--                </executions>-->
                     <configuration>
-                        <verbose>true</verbose>
-                        <images>
-                            <image>
-                                <name>${project.artifactId}</name>
-                                <build>
-                                    <from>java:8-jdk-alpine</from>
-                                    <entryPoint>
-                                        <exec>
-                                            <args>java</args>
-                                            <args>-jar</args>
-                                            <args>/maven/${project.build.finalName}.jar</args>
-                                        </exec>
-                                    </entryPoint>
-                                    <assembly>
-                                        <descriptorRef>artifact</descriptorRef>
-                                    </assembly>
-                                </build>
-                            </image>
-                        </images>
+                        <forceTags>true</forceTags> <!--覆盖相同标签镜像-->
+                        <imageName>staffjoy/${project.artifactId}:1.0</imageName> <!--指定镜像名称 仓库/镜像名:标签-->
+                        <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory> <!--dockerfile文件路径-->
+                        <!--<skipDockerBuild>false</skipDockerBuild>-->
+                        <!--                    <dockerHost>http://192.168.109.128:2375</dockerHost> &lt;!&ndash; 指定仓库地址 &ndash;&gt;-->
+                        <!--<dockerCertPath>C:\Users\Administrator\.docker\machine\machines\default</dockerCertPath>-->
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <!--resources.resource.directory：用于指定需要复制的文件的根目录，-->
+                                <!--${project.build.directory}表示target目录。-->
+                                <directory>${project.build.directory}</directory>
+                                <!--resources.resource.include:用于指定需要复制的文件。-->
+                                <!--${project.build.finalName}.jar指的是maven编译打包后的jar包。-->
+                                <include>${project.build.finalName}.jar</include>
+                            </resource>
+                        </resources>
+                        <buildArgs>
+                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        </buildArgs>
+
+                        <!-- 必须与maven配置文件settings.xml中配置的server.id一致，镜像名称就必须指定DockerHub的用户名了，私服就指定ip:port -->
+                        <!--                    <serverId>docker-hub</serverId>-->
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>build</id>
-                            <phase>post-integration-test</phase>
-                            <goals>
-                                <goal>build</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
+
             </plugins>
         </pluginManagement>
         <plugins>
