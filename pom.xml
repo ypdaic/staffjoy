@@ -197,7 +197,7 @@
                     <configuration>
                         <forceTags>true</forceTags> <!--覆盖相同标签镜像-->
                         <imageName>staffjoy/${project.artifactId}:1.0</imageName> <!--指定镜像名称 仓库/镜像名:标签-->
-                        <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory> <!--dockerfile文件路径-->
+                        <dockerDirectory>${project.basedir}</dockerDirectory> <!--dockerfile文件路径-->
                         <!--<skipDockerBuild>false</skipDockerBuild>-->
                         <!--                    <dockerHost>http://192.168.109.128:2375</dockerHost> &lt;!&ndash; 指定仓库地址 &ndash;&gt;-->
                         <!--<dockerCertPath>C:\Users\Administrator\.docker\machine\machines\default</dockerCertPath>-->
