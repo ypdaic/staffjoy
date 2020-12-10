@@ -6,4 +6,4 @@ WORKDIR /usr/app
 
 RUN sh -c 'touch web-app-1.0.0.jar'
 
-ENTRYPOINT ["java", "-jar", "web-app-1.0.0.jar"]
+ENTRYPOINT ["java", "-Xmx512m","-jar", "web-app-1.0.0.jar"]

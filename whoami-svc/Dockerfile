@@ -6,4 +6,4 @@ WORKDIR /usr/app
 
 RUN sh -c 'touch whoami-svc-1.0.0.jar'
 
-ENTRYPOINT ["java", "-jar", "whoami-svc-1.0.0.jar"]
+ENTRYPOINT ["java", "-Xmx512m","-jar", "whoami-svc-1.0.0.jar"]

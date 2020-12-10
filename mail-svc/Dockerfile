@@ -6,4 +6,4 @@ WORKDIR /usr/app
 
 RUN sh -c 'touch mail-svc-1.0.0.jar'
 
-ENTRYPOINT ["java", "-jar", "mail-svc-1.0.0.jar"]
+ENTRYPOINT ["java", "-Xmx512m","-jar", "mail-svc-1.0.0.jar"]

@@ -6,4 +6,4 @@ WORKDIR /usr/app
 
 RUN sh -c 'touch bot-svc-1.0.0.jar'
 
-ENTRYPOINT ["java", "-jar", "bot-svc-1.0.0.jar"]
+ENTRYPOINT ["java", "-Xmx512m","-jar", "bot-svc-1.0.0.jar"]
