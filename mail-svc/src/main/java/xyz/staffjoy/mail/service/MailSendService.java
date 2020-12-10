@@ -1,5 +1,7 @@
 package xyz.staffjoy.mail.service;
 
+import cn.hutool.extra.mail.MailAccount;
+import cn.hutool.extra.mail.MailUtil;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailResponse;
@@ -64,9 +66,17 @@ public class MailSendService {
         mailRequest.setHtmlBody(req.getHtmlBody());
 
         try {
-            SingleSendMailResponse mailResponse = acsClient.getAcsResponse(mailRequest);
-            logger.info("Successfully sent email - request id : " + mailResponse.getRequestId(), logContext);
-        } catch (ClientException ex) {
+            MailAccount account = new MailAccount();
+            account.setHost("smtp.qq.com");
+            account.setPort(587);
+            account.setAuth(true);
+            account.setFrom(MailConstant.FROM);
+            account.setUser("841943896@qq.com");
+            account.setPass("trxtwasscyljbfji");
+//            SingleSendMailResponse mailResponse = acsClient.getAcsResponse(mailRequest);
+            MailUtil.send(req.getTo(), req.getSubject(), req.getHtmlBody(), true);
+//            logger.info("Successfully sent email - request id : " + mailResponse.getRequestId(), logContext);
+        } catch (Exception ex) {
             Context sentryContext = sentryClient.getContext();
             sentryContext.addTag("subject", req.getSubject());
             sentryContext.addTag("to", req.getTo());
