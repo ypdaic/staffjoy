@@ -1,4 +1,4 @@
-FROM node:15.4.0-buster-slim as builder
+FROM node as builder
 
 WORKDIR '/build'
 COPY app ./app
