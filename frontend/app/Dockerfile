@@ -1,4 +1,9 @@
-FROM node:alpine as builder
+FROM node:9.2.1-alpine as builder
+
+# Install base packages and set timezone ShangHai
+RUN apk update && apk add bash tzdata \
+    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 WORKDIR '/build'
 COPY app ./app
 COPY resources ./resources
