@@ -17,7 +17,7 @@ RUN npm run build
 
 RUN ls /build/app/dist
 
-FROM nginx
+FROM daocloud.io/library/nginx:1.16-perl
 EXPOSE 80
 COPY --from=builder /build/app/dist /usr/share/nginx/html
 
