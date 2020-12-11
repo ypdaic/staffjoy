@@ -1,8 +1,4 @@
-FROM node:9.2.1-alpine as builder
-
-# Install base packages and set timezone ShangHai
-RUN apk update && apk add bash tzdata \
-    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+FROM node:15.4.0-buster-slim as builder
 
 WORKDIR '/build'
 COPY app ./app
