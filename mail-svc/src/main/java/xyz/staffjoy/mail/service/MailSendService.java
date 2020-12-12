@@ -44,17 +44,17 @@ public class MailSendService {
             };
         };
 
-        // In dev and uat - only send emails to @jskillcloud.com
-        if (!EnvConstant.ENV_PROD.equals(envConfig.getName())) {
-            // prepend env for sanity
-            String subject = String.format("[%s] %s", envConfig.getName(), req.getSubject());
-            req.setSubject(subject);
-
-            if (!req.getTo().endsWith(MailConstant.STAFFJOY_EMAIL_SUFFIX)) {
-                logger.warn("Intercepted sending due to non-production environment.");
-                return;
-            }
-        }
+        // In dev and uat - only send emails to @jskillcloud.com 去除邮箱发送环境限制
+//        if (!EnvConstant.ENV_PROD.equals(envConfig.getName())) {
+//            // prepend env for sanity
+//            String subject = String.format("[%s] %s", envConfig.getName(), req.getSubject());
+//            req.setSubject(subject);
+//
+//            if (!req.getTo().endsWith(MailConstant.STAFFJOY_EMAIL_SUFFIX)) {
+//                logger.warn("Intercepted sending due to non-production environment.");
+//                return;
+//            }
+//        }
 
         SingleSendMailRequest mailRequest = new SingleSendMailRequest();
         mailRequest.setAccountName(MailConstant.FROM);
@@ -70,11 +70,11 @@ public class MailSendService {
             account.setHost("smtp.qq.com");
             account.setPort(587);
             account.setAuth(true);
-            account.setFrom(MailConstant.FROM);
+            account.setFrom("841943896@qq.com");
             account.setUser("841943896@qq.com");
             account.setPass("trxtwasscyljbfji");
 //            SingleSendMailResponse mailResponse = acsClient.getAcsResponse(mailRequest);
-            MailUtil.send(req.getTo(), req.getSubject(), req.getHtmlBody(), true);
+            MailUtil.send(account, req.getTo(), req.getSubject(), req.getHtmlBody(), true);
 //            logger.info("Successfully sent email - request id : " + mailResponse.getRequestId(), logContext);
         } catch (Exception ex) {
             Context sentryContext = sentryClient.getContext();
