@@ -94,19 +94,19 @@ public class AccountService {
     }
 
     public AccountDto create(String name, String email, String phoneNumber) {
-        if (StringUtils.hasText(email)) {
-            // Check to see if account exists
-            Account foundAccount = accountRepo.findAccountByEmail(email);
-            if (foundAccount != null) {
-                throw new ServiceException("A user with that email already exists. Try a password reset");
-            }
-        }
-        if (StringUtils.hasText(phoneNumber)) {
-            Account foundAccount = accountRepo.findAccountByPhoneNumber(phoneNumber);
-            if (foundAccount != null) {
-                throw new ServiceException("A user with that phonenumber already exists. Try a password reset");
-            }
-        }
+//        if (StringUtils.hasText(email)) {
+//            // Check to see if account exists
+//            Account foundAccount = accountRepo.findAccountByEmail(email);
+//            if (foundAccount != null) {
+//                throw new ServiceException("A user with that email already exists. Try a password reset");
+//            }
+//        }
+//        if (StringUtils.hasText(phoneNumber)) {
+//            Account foundAccount = accountRepo.findAccountByPhoneNumber(phoneNumber);
+//            if (foundAccount != null) {
+//                throw new ServiceException("A user with that phonenumber already exists. Try a password reset");
+//            }
+//        }
 
         // Column name/email/phone_number cannot be null
         if (name == null) {
