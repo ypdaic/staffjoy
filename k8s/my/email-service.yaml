@@ -1,0 +1,104 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: '4'
+    k8s.kuboard.cn/ingress: 'false'
+    k8s.kuboard.cn/service: ClusterIP
+    k8s.kuboard.cn/workload: email-service
+  creationTimestamp: '2020-12-10T17:16:30Z'
+  generation: 6
+  labels:
+    k8s.kuboard.cn/layer: svc
+    k8s.kuboard.cn/name: email-service
+  name: email-service
+  namespace: staffjoy
+  resourceVersion: '629901'
+  selfLink: /apis/apps/v1/namespaces/staffjoy/deployments/email-service
+  uid: 24e05502-6077-4612-957d-fd4058a450e3
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s.kuboard.cn/layer: svc
+      k8s.kuboard.cn/name: email-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        k8s.kuboard.cn/layer: svc
+        k8s.kuboard.cn/name: email-service
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: staffjoy-config
+          image: 'registry.cn-hangzhou.aliyuncs.com/dypc/staffjoy-mail-svc:2.0'
+          imagePullPolicy: IfNotPresent
+          name: staffjoy-mail-svc
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: ali-images-registry
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2020-12-11T09:26:10Z'
+      lastUpdateTime: '2020-12-11T09:26:10Z'
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: 'True'
+      type: Available
+    - lastTransitionTime: '2020-12-10T17:16:30Z'
+      lastUpdateTime: '2020-12-12T14:41:30Z'
+      message: ReplicaSet "email-service-7cfb4c75f6" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: 'True'
+      type: Progressing
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    k8s.kuboard.cn/workload: email-service
+  creationTimestamp: '2020-12-10T17:16:30Z'
+  labels:
+    k8s.kuboard.cn/layer: svc
+    k8s.kuboard.cn/name: email-service
+  name: email-service
+  namespace: staffjoy
+  resourceVersion: '541142'
+  selfLink: /api/v1/namespaces/staffjoy/services/email-service
+  uid: cbdff812-792f-43e0-bde5-f31cb5d7c884
+spec:
+  clusterIP: 10.244.35.90
+  ports:
+    - name: wnixay
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    k8s.kuboard.cn/layer: svc
+    k8s.kuboard.cn/name: email-service
+  sessionAffinity: None
+  type: ClusterIP
+

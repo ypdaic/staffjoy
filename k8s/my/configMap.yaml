@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+data:
+  ACCOUNT_DATASOURCE_PASSWORD: test1234
+  ACCOUNT_DATASOURCE_URL: >-
+    jdbc:mysql://192.168.109.129:3308/staffjoy_account?useUnicode=true&characterEncoding=utf-8
+  ACCOUNT_DATASOURCE_USERNAME: root
+  ACCOUNT_SERVICE_ENDPOINT: 'http://account-service'
+  ALIYUN_ACCESS_KEY: YOUR_ALIYUN_ACCESS_KEY
+  ALIYUN_ACCESS_SECRET: YOUR_ALIYUN_ACCESS_SECRET
+  BOT_SERVICE_ENDPOINT: 'http://bot-service'
+  COMPANY_DATASOURCE_PASSWORD: test1234
+  COMPANY_DATASOURCE_URL: >-
+    jdbc:mysql://192.168.109.129:3308/staffjoy_company?useUnicode=true&characterEncoding=utf-8
+  COMPANY_DATASOURCE_USERNAME: root
+  COMPANY_SERVICE_ENDPOINT: 'http://company-service'
+  EMAIL_SERVICE_ENDPOINT: 'http://email-service'
+  INTERCOM_ACCESS_TOKEN: YOUR_INTERCOM_ACCESS_TOKEN
+  INTERCOM_APP_ID: TBD
+  INTERCOM_SIGNING_SECRET: TBD
+  RECAPTCHA_PRIVATE: test-recaptcha-private
+  RECAPTCHA_PUBLIC: test-recaptcha-public
+  SENTRY_DSN: 'https://80aaf4ae889b414f9fe72e3904cd5246@sentry.io/1380198'
+  SERVER_PORT: '80'
+  SIGNING_SECRET: your_signing_secret
+  SMS_SERVICE_ENDPOINT: 'http://sms-service'
+  SPRING_PROFILES_ACTIVE: test
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2020-12-10T16:17:05Z'
+  name: staffjoy-config
+  namespace: staffjoy
+  resourceVersion: '536347'
+  selfLink: /api/v1/namespaces/staffjoy/configmaps/staffjoy-config
+  uid: b1c3ab6b-420f-4098-8fbb-142cc322beb5
+
